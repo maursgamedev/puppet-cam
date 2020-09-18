@@ -6,5 +6,6 @@ This is a free alternative for a virtual webcam for streaming or youtube videos.
  * Microphone Capture
 
 ## What needs to be done:
- * [ ] Render the example puppet
- * [ ] Make the puppet follow the microphone levels
+ * [x] Render the example puppet
+ * [x] Make the puppet follow the microphone levels
+ * [ ] Make the puppet eyes follw the mouse on screen.

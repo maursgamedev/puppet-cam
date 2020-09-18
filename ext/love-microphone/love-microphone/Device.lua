@@ -6,7 +6,7 @@
 ]]
 
 local ffi = require("ffi")
-local al = require("lib.love-microphone.love-microphone.openal")
+local al = require("ext.love-microphone.love-microphone.openal")
 
 local Device = {}
 local formats = {

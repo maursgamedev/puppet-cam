@@ -6,9 +6,9 @@
 ]]
 
 local ffi = require("ffi")
-local al = require("lib.love-microphone.love-microphone.openal")
-local Device = require("lib.love-microphone.love-microphone.Device")
-local QueueableSource = require("lib.love-microphone.love-microphone.QueueableSource")
+local al = require("ext.love-microphone.love-microphone.openal")
+local Device = require("ext.love-microphone.love-microphone.Device")
+local QueueableSource = require("ext.love-microphone.love-microphone.QueueableSource")
 
 local microphone = {
 	_devices = {}
