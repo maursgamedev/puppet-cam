@@ -17,10 +17,25 @@ function Sprite:initialize(args)
 	end
 end
 
+function Sprite:realWidth()
+	return self.image:getWidth() * self.scaleX
+end
+
+function Sprite:realHeight()
+	return self.image:getHeight() * self.scaleY
+end
+
+function Sprite:size()
+	return vector(self:realWidth(), self:realHeight())
+end
+
+function Sprite:upperLeftCorner()
+	return self:globalPosition() - (vector(self:realWidth(), self:realHeight()) / 2)
+end
+
 function Sprite:draw(ctx)
 	if self.visible then
-		local position = self:globalPosition()
-		local corner = position - (vector(self.image:getHeight() * self.scaleX, self.image:getWidth() * self.scaleY) / 2)
+		local corner = self:upperLeftCorner()
 		ctx.draw(
 			self.image, 
 			corner.x, 
@@ -29,6 +44,11 @@ function Sprite:draw(ctx)
 			self.scaleX,
 			self.scaleY
 		)
+
+		if self.debugDraw then
+			local size = self:size()
+			ctx.rectangle('line', corner.x, corner.y, size.x, size.y)
+		end
 	end
 	Node2D.draw(self, ctx)
 end

@@ -73,6 +73,8 @@ function love.load()
 	})
 	local face = Node2D({
 		name = 'Face',
+		debugDraw = true,
+		position = vector(0,8),
 		children = collect({
 			leftEye,
 			rightEye,
@@ -91,6 +93,7 @@ function love.load()
 				name = 'Head',
 				position = vector(400,300),
 				image = assets.head,
+				debugDraw = true,
 				children = collect({face})
 			})
 		})
