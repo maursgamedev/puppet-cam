@@ -1,0 +1,14 @@
+{
+  "name": "mouse-detection",
+  "version": "1.0.0",
+  "description": "Mouse detection server for puppet-cam",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "mauriciogamedev",
+  "license": "MIT",
+  "dependencies": {
+    "robotjs": "^0.6.0"
+  }
+}
