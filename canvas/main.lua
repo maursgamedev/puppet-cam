@@ -18,7 +18,7 @@ function love.load()
 	root = Node({
 		name = 'Root',
 		children = collect({
-			require('src.app.scenes.CharacterHead')}
+			require('src.app.scenes.Character')}
 		)
 	})
 
@@ -27,6 +27,7 @@ function love.load()
 end
 
 function love.draw()
+	love.graphics.clear(0,1,0,1)
 	if root and canvas then
 		--canvas:renderTo(function() 
 			root:draw(love.graphics)

@@ -3,6 +3,7 @@ local Node2D = require 'src.nodes.Node2D'
 local Sprite = require 'src.nodes.Sprite'
 local MouthNode = require 'src.app.MouthNode'
 local FaceNode = require 'src.app.FaceNode'
+local HeadHolderNode = require 'src.app.HeadHolderNode'
 
 local mouths = collect({
 	'assets/mouth/0.png',
@@ -24,6 +25,11 @@ local assets = collect({
 	eye_lowerPalpebra = 'assets/eye/lower_palpebra.png',
 	eye_upperPalpebra = 'assets/eye/upper_palpebra.png',
 	eye_white = 'assets/eye/white.png',
+	ear = 'assets/ear.png',
+	ear_border = 'assets/ear_border.png',
+	hair = 'assets/hair.png',
+	torso = 'assets/torso.png',
+	glasses = 'assets/glasses.png',
 }):map(function(k, value) return k, love.graphics.newImage(value) end):all()
 
 local leftEye = Node2D({
@@ -34,7 +40,7 @@ local leftEye = Node2D({
 		Sprite({name = 'Iris', image = assets.eye_iris}),
 		Sprite({name = 'UpperPalpebra', image = assets.eye_upperPalpebra, position = vector(0, -27)}),
 		Sprite({name = 'LowerPalpebra', image = assets.eye_lowerPalpebra, position = vector(0, 10)}),
-		Sprite({name = 'Eyebrow', image = assets.eye_eyebrow, position = vector(0, -10)})
+		Sprite({name = 'Eyebrow', image = assets.eye_eyebrow, position = vector(0, -17)})
 	})
 })
 
@@ -47,13 +53,13 @@ local rightEye = Node2D({
 		Sprite({name = 'Iris', image = assets.eye_iris, scale = vector(-1, 1)}),
 		Sprite({name = 'UpperPalpebra', image = assets.eye_upperPalpebra, position = vector(0, -27)}),
 		Sprite({name = 'LowerPalpebra', image = assets.eye_lowerPalpebra, position = vector(0, 10)}),
-		Sprite({name = 'Eyebrow', image = assets.eye_eyebrow, position = vector(0, -10)})
+		Sprite({name = 'Eyebrow', image = assets.eye_eyebrow, position = vector(0, -17)})
 	})
 })
 
 local face = FaceNode({
 	name = 'Face',
-	position = vector(0,13),
+	position = vector(0,17),
 	children = collect({
 		Sprite({
 			name = 'Nose',
@@ -62,6 +68,11 @@ local face = FaceNode({
 		}),
 		leftEye,
 		rightEye,
+		Sprite({
+			name = 'Glasses',
+			position = vector(0,-5),
+			image = assets.glasses
+		}),
 		MouthNode({
 			name = 'Mouth',
 			position = vector(0, 30),
@@ -70,10 +81,46 @@ local face = FaceNode({
 	}),
 })
 
-return Sprite({
-	name = 'Head',
+return HeadHolderNode({
 	scale = vector(2,2),
 	position = vector(400,300),
-	image = assets.head,
-	children = collect({face})
+	children = collect({
+		Sprite({
+			name = 'Torso',
+			image = assets.torso,
+			position = vector(0, 94)
+		}),
+		Sprite({
+			name = 'LeftEarBorder',
+			image = assets.ear_border,
+			position = vector(-62, 8)
+		}),
+		Sprite({
+			name = 'RightEarBorder',
+			image = assets.ear_border,
+			scale = vector(-1, 1),
+			position = vector(62, 8)
+		}),
+		Sprite({
+			name = 'Head',
+			image = assets.head,
+			children = collect({face})
+		}),
+		Sprite({
+			name = 'LeftEar',
+			image = assets.ear,
+			position = vector(-62, 8)
+		}),
+		Sprite({
+			name = 'RightEar',
+			image = assets.ear,
+			scale = vector(-1, 1),
+			position = vector(62, 8)
+		}),
+		Sprite({
+			name = 'Hair',
+			image = assets.hair,
+			position = vector(-6, -23)
+		})
+	})
 })
