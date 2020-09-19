@@ -22,4 +22,5 @@ the love2d window.
  * [x] Render the example puppet.
  * [x] Make the puppet follow the microphone levels.
  * [x] Make the puppet blink randomly
- * [ ] Make the puppet eyes follw the mouse on screen.
+ * [x] Make the puppet eyes follow the mouse on screen.
+ * [ ] Make the puppet eyes follow the mouse outside the game window
