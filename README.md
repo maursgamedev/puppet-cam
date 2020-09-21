@@ -1,5 +1,6 @@
 
 # Puppet Cam
+![PuppetCam Gif Example](https://github.com/mauriciogamedev/puppet-cam/blob/master/example.gif?raw=true)
 This is a free alternative for a virtual webcam for streaming or youtube videos.
 This project was developed on Linux, but it uses multi platform tools, so it
 will probably work on Windows and OSX without problems.
