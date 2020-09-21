@@ -79,7 +79,7 @@ function FaceNode:nextState()
 end
 
 function FaceNode:process(delta)
-	local mouseFromCenter = vector(love.mouse.getX() - 400, love.mouse.getY() - 300)
+	local mouseFromCenter = mouseFromServer:clone()
 	local distanceFromCenter = 0.0
 	if mouseFromCenter:length() > 100.0 then
 		distanceFromCenter = mouseFromCenter:norm()

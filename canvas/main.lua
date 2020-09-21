@@ -1,9 +1,3 @@
---[[
-	Records a user's microphone and echos it back to them.
-
-	This variant uses "fast as possible mode" to get a lower latency audio stream.
-]]
-
 require 'src.globals'
 
 local Node = require 'src.nodes.Node'
@@ -12,9 +6,17 @@ local Text = require 'src.nodes.Text'
 local root
 local canvas
 
-function love.load()
-	canvas = love.graphics.newCanvas()
+local socket = require 'socket'
+local ip = assert(socket.dns.toip('localhost'))
+local udp = assert(socket.udp())
 
+mouseFromServer = vector()
+
+function love.load()
+	print('Waiting for  on localhost')
+	udp:setsockname(ip, 41234)
+	udp:settimeout(0)
+	canvas = love.graphics.newCanvas()
 	root = Node({
 		name = 'Root',
 		children = collect({
@@ -34,12 +36,17 @@ function love.draw()
 		--end)
 		--love.graphics.draw(canvas, -400, -200, 0, 2, 2)
 	end
-	love.graphics.print('x: '.. love.mouse.getX() .. ' y: '.. love.mouse.getY(), 10, 10)
+	--love.graphics.print('x: '.. mouseFromServer.x .. ' y: '.. mouseFromServer.y, 10, 10)
 end
 
--- Add microphone polling to our update loop
 function love.update(delta)
 	if root then 
 		root:update(delta)
+	end
+	local received = udp:receive()
+	if received then
+		local coordTable = split(received, ',')
+		mouseFromServer.x = tonumber(coordTable:get(1))
+		mouseFromServer.y = tonumber(coordTable:get(2))
 	end
 end

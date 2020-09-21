@@ -1,9 +1,9 @@
 local Node = require 'src.nodes.Node'
 local Node2D = require 'src.nodes.Node2D'
 local Sprite = require 'src.nodes.Sprite'
-local MouthNode = require 'src.app.MouthNode'
-local FaceNode = require 'src.app.FaceNode'
-local HeadHolderNode = require 'src.app.HeadHolderNode'
+local MouthNode = require 'src.app.nodes.MouthNode'
+local FaceNode = require 'src.app.nodes.FaceNode'
+local HeadHolderNode = require 'src.app.nodes.HeadHolderNode'
 
 local mouths = collect({
 	'assets/mouth/0.png',
@@ -82,8 +82,8 @@ local face = FaceNode({
 })
 
 return HeadHolderNode({
-	scale = vector(2,2),
-	position = vector(400,300),
+	-- scale = vector(2,2),
+	position = vector((love.graphics.getWidth()/2), (love.graphics.getHeight()/2)),
 	children = collect({
 		Sprite({
 			name = 'Torso',
