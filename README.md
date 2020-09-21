@@ -40,3 +40,6 @@ the love2d window.
  * [x] Make the puppet blink randomly
  * [x] Make the puppet eyes follow the mouse on screen.
  * [x] Make the puppet eyes follow the mouse outside the game window
+ * [ ] Make a easy way to run both applications at once
+ * [ ] Export to itch.io
+ * [ ] Make the character easy to customize.
