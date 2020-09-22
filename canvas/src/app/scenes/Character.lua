@@ -82,7 +82,7 @@ local face = FaceNode({
 })
 
 return HeadHolderNode({
-	-- scale = vector(2,2),
+	scale = vector(2,2),
 	position = vector((love.graphics.getWidth()/2), (love.graphics.getHeight()/2)),
 	children = collect({
 		Sprite({

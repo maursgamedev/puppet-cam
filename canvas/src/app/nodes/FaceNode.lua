@@ -79,12 +79,11 @@ function FaceNode:nextState()
 end
 
 function FaceNode:process(delta)
-	local mouseFromCenter = mouseFromServer:clone()
 	local distanceFromCenter = 0.0
-	if mouseFromCenter:length() > 100.0 then
-		distanceFromCenter = mouseFromCenter:norm()
+	if mouseFromCenter():length() > 100.0 then
+		distanceFromCenter = mouseFromCenter():norm()
 	else
-		distanceFromCenter = mouseFromCenter / 100
+		distanceFromCenter = mouseFromCenter() / 100
 	end
 	self.position = self.startingPosition + distanceFromCenter * 2
 	self.irises:each(function(k, iris)

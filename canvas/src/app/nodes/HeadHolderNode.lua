@@ -18,12 +18,11 @@ function HeadHolderNode:onReady()
 end
 
 function HeadHolderNode:process(delta)
-	local mouseFromCenter = mouseFromServer:clone()
 	local distanceFromCenter = 0.0
-	if mouseFromCenter:length() > 100.0 then
-		distanceFromCenter = mouseFromCenter:norm()
+	if mouseFromCenter():length() > 100.0 then
+		distanceFromCenter = mouseFromCenter():norm()
 	else
-		distanceFromCenter = mouseFromCenter / 100
+		distanceFromCenter = mouseFromCenter() / 100
 	end
 	local face = self
 	self.earSprites:each(function(k, sprite)

@@ -5,17 +5,9 @@ local Text = require 'src.nodes.Text'
 
 local root
 local canvas
-
-local socket = require 'socket'
-local ip = assert(socket.dns.toip('localhost'))
-local udp = assert(socket.udp())
-
-mouseFromServer = vector()
+local isFullScreen
 
 function love.load()
-	print('Waiting for  on localhost')
-	udp:setsockname(ip, 41234)
-	udp:settimeout(0)
 	canvas = love.graphics.newCanvas()
 	root = Node({
 		name = 'Root',
@@ -23,6 +15,11 @@ function love.load()
 			require('src.app.scenes.Character')}
 		)
 	})
+
+	game.originalScreenHeight = love.graphics.getHeight()
+	game.originalScreenWidth = love.graphics.getWidth()
+
+	isFullScreen = love.window.setFullscreen(true)
 
 	root:load()
 	root:ready()
@@ -43,10 +40,13 @@ function love.update(delta)
 	if root then 
 		root:update(delta)
 	end
-	local received = udp:receive()
-	if received then
-		local coordTable = split(received, ',')
-		mouseFromServer.x = tonumber(coordTable:get(1))
-		mouseFromServer.y = tonumber(coordTable:get(2))
+	if not game.screenSizeLoaded and isFullScreen then
+		game.screenHeight = love.graphics.getHeight()
+		game.screenWidth = love.graphics.getWidth()
+		game.screenResizeCooldown = game.screenResizeCooldown - delta
+	end
+	if game.screenResizeCooldown < 0 and not game.screenSizeLoaded then
+		game.screenSizeLoaded = love.window.setMode(game.originalScreenWidth, game.originalScreenHeight, {fullscreen = false})
+		love.mouse.setPosition( game.originalScreenWidth* 0.5, game.originalScreenHeight * 0.5 )
 	end
 end
