@@ -19,12 +19,12 @@ ffi.cdef[[
 	Uint32 SDL_GetGlobalMouseState(int* x, int* y);
 ]]
 
-local C = ffi.C
+local SDL = (ffi.os == "Windows") and ffi.load("SDL2") or ffi.C
 
 function mouseFromCenter()
 	local posPointerX = ffi.new('int[1]', {})
 	local posPointerY = ffi.new('int[1]', {})
-	C.SDL_GetGlobalMouseState(posPointerX, posPointerY)
+	SDL.SDL_GetGlobalMouseState(posPointerX, posPointerY)
 	local centerX = game.screenWidth/2
 	local centerY = game.screenHeight/2
 	return vector(posPointerX[0] - centerX, posPointerY[0] - centerY)
